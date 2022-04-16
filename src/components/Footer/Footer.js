@@ -4,7 +4,7 @@ const Footer = () => {
     const year = new Date().getFullYear();
 
     return (
-        <div>
+        <div className='pb-4'>
             <h2>&copy; Copyright reserved {year}</h2>
         </div>
     );

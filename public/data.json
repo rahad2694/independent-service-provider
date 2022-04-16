@@ -1,0 +1,30 @@
+[
+    {
+      "name": "Mammals Photography",
+      "id": 1,
+      "img": "https://www.nfi.edu/wp-content/uploads/2021/12/image4-16-184x300.png",
+      "price": 590.99,
+      "info": "When I try to photograph the mammals, I follow the constant movements that make them tricky to capture. In addition, these animals are commonly found in the woods and appear only during dusk or dawn."
+    },
+    {
+      "name": "Bird Photography",
+      "id": 2,
+      "img": "https://www.nfi.edu/wp-content/uploads/2021/12/image8-13-200x300.png",
+      "price": 490.99,
+      "info": "The flight of a bird and its fast-paced movement intrigues me to photograph them. However, considering the quick move of birds, deep understanding of the subjects behavior is required."
+    },
+    {
+      "name": "Underwater Photography",
+      "id": 3,
+      "img": "https://i.ibb.co/XLn30sg/under-water.jpg",
+      "price": 890.99,
+      "info": "This form of photography demands the knowledge of sophisticated equipment and techniques to access the subjects, which I love to show."
+    },
+    {
+      "name": "Aerial Photography",
+      "id": 4,
+      "img": "https://www.nfi.edu/wp-content/uploads/2021/12/image6-13-150x300.png",
+      "price": 590.99,
+      "info": "Wildlife Aerial photography is a pretty challenging genre which mainly deals with capturing the images of wild animals with the help of drone cameras."
+    }
+  ]
