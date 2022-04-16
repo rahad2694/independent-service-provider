@@ -4,10 +4,10 @@ import logo from '../../images/logo.png'
 
 const Header = () => {
     return (
-        <nav className='grid grid-cols-2 py-1'>
+        <nav className='grid grid-cols-2 py-1 sticky top-0 bg-white z-50'>
             <div className='flex ml-2 md:ml-10'>
                 <Link className='flex justify-center align-middle' to='/'>
-                    <p className='text-xl font-bold mt-4'>Rahad's Wildlife</p>
+                    <p className='text-xl font-bold mt-4'>Rahad Photography</p>
                     <img src={logo} alt="" />
                 </Link>
             </div>
