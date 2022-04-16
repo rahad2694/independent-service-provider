@@ -13,7 +13,7 @@ const Header = () => {
             </div>
             <div className='flex justify-evenly align-middle mt-6 md:mt-4 md:mx-20'>
                 <NavLink className={({ isActive }) => (isActive) ? 'text-red-600' : ''} to='/blogs'>Blogs</NavLink>
-                <NavLink className={({ isActive }) => (isActive) ? 'text-red-600' : ''} to='/about'>About-Me</NavLink>
+                <NavLink className={({ isActive }) => (isActive) ? 'text-red-600' : ''} to='/about'>About</NavLink>
                 <NavLink className={({ isActive }) => (isActive) ? 'text-red-600' : ''} to='/login'>Login</NavLink>
             </div>
         </nav>
