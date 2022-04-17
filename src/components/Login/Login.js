@@ -3,6 +3,7 @@ import { useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGith
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.init';
+import ResetPassword from './ResetPassword/ResetPassword';
 import Spinners from './Spinners/Spinners';
 
 const Login = () => {
@@ -21,23 +22,25 @@ const Login = () => {
         emailError,
     ] = useSignInWithEmailAndPassword(auth);
 
-    const [email, seEmail] = useState('');
-    const [password, sePassword] = useState('');
-    console.log(email, password);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    // console.log(email, password);
 
-    if (emailError || googleError || githubError || facebookError) {
-        let errorNote = emailError || googleError || githubError || facebookError;
-        toast.error(errorNote.message, { id: 'error' })
-        return <Login></Login>
-    }
     if (emailLoading || googleLoading || githubLoading || facebookLoading) {
         return <Spinners></Spinners>
     }
+    if (emailError || googleError || githubError || facebookError) {
+        let errorNote = emailError || googleError || githubError || facebookError;
+        toast.error(errorNote?.message, { id: 'error' })
+        return <Login></Login>
+    }
 
     if (emailUser || googleUser || githubUser || facebookUser) {
-        toast.success('Successfully Signed in..!!', { id: 'login' });
         navigate(from, { replace: true });
+        toast.success('Successfully Signed in..!!', { id: 'login' });
     }
+
+    console.log(emailUser?.user);
 
     return (
         <div>
@@ -111,7 +114,7 @@ const Login = () => {
                                 {/* <!-- Email input --> */}
                                 <div className="mb-6">
                                     <input
-                                        onBlur={(e) => seEmail(e.target.value)}
+                                        onBlur={(e) => setEmail(e.target.value)}
                                         type="text"
                                         className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         id="exampleFormControlInput1"
@@ -123,7 +126,7 @@ const Login = () => {
                                 {/* <!-- Password input --> */}
                                 <div className="mb-6">
                                     <input
-                                        onBlur={(e) => sePassword(e.target.value)}
+                                        onBlur={(e) => setPassword(e.target.value)}
                                         type="password"
                                         className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         id="exampleFormControlInput2"
@@ -131,8 +134,9 @@ const Login = () => {
                                     />
                                 </div>
 
-                                <div className="flex justify-between items-center mb-6">
-                                    <a href="#!" className="text-gray-800 hover:text-red-500">Forgot password?</a>
+                                <div className="flex justify-between items-center mb-2">
+                                    {/* <a href="#!" className="text-gray-800 hover:text-red-500">Forgot password?</a> */}
+                                    <ResetPassword></ResetPassword>
                                 </div>
 
                                 <div className="text-center lg:text-left">
@@ -147,7 +151,7 @@ const Login = () => {
                                         Don't have an account?
                                         <Link
                                             to='/signup'
-                                            className="mx-2 text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
+                                            className="mx-2 text-blue-600 hover:text-red-500 focus:text-red-500 ttransition duration-150 ease-in"
                                         >Register</Link>
                                     </p>
                                 </div>

@@ -8,7 +8,7 @@ const Services = () => {
         .then(res => res.json())
         .then(data => setServices(data));
     },[]);
-    console.log(services);
+    // console.log(services);
     return (
         <div className='m-12'>
             <h1 className='text-2xl font-bold my-8 py-4'>Services</h1>
