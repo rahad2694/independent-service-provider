@@ -4,6 +4,7 @@ import { signOut } from 'firebase/auth';
 import { Link, NavLink } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.init';
 import logo from '../../images/logo.png'
+import toast from 'react-hot-toast';
 
 const Header = () => {
     const [user] = useAuthState(auth);
@@ -18,7 +19,12 @@ const Header = () => {
             <div className='flex justify-evenly align-middle mt-6 sm:mt-4 md:mx-20'>
                 <NavLink className={({ isActive }) => (isActive) ? 'text-red-600' : ''} to='/blogs'>Blogs</NavLink>
                 <NavLink className={({ isActive }) => (isActive) ? 'text-red-600' : ''} to='/about'>About</NavLink>
-                {user ? <button onClick={()=>signOut(auth)} className='text-blue-600 hover:text-orange-500 rounded-xl mb-6 sm:mb-4'>Logout</button>
+                {user ? <button
+                    onClick={() => {
+                        signOut(auth);
+                        toast.success('Successfully Logged Out', { id: 'logout' });
+                    }}
+                    className='text-blue-600 hover:text-orange-500 rounded-xl mb-6 sm:mb-4'>Logout</button>
                     :
                     <NavLink className={({ isActive }) => (isActive) ? 'text-red-600' : ''} to='/login'>Login</NavLink>
                 }
