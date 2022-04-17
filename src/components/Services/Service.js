@@ -5,9 +5,9 @@ import './Service.css';
 const Service = ({ service }) => {
     const { name, img, price, info } = service;
     return (
-        <div className='border shadow-xl p-10'>
+        <div className='border-2 shadow-xl hover:shadow-2xl p-10'>
                 <div className='flex justify-center'>
-                    <img className='service-image' src={img} alt="" />
+                    <img className='service-image hover:scale-105 duration-200 ease-in' src={img} alt="" />
                 </div>
                 <h1 className='font-bold my-3 text-lg'>{name}</h1>
                 <p className='text-gray-500'>{info}</p>

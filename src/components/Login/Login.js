@@ -1,11 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import auth from '../../Firebase/Firebase.init';
+import Spinners from './Spinners/Spinners';
 
 const Login = () => {
     let navigate = useNavigate();
     let location = useLocation();
     let from = location.state?.from?.pathname || "/";
-    navigate(from, { replace: true });
+    
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
+
+    const [email, seEmail] = useState('');
+    const [password, sePassword] = useState('');
+    console.log(email, password);
+
+    if (error) {
+        // return (
+        //     <div>
+        //         <p>Error: {error.message}</p>
+        //     </div>
+        // );
+        toast.error(error.message,{id:'error'})
+    }
+    if (loading) {
+        // toast('Loading',{id:'loading'});
+        return <Spinners></Spinners>
+    }
+    // if (user) {
+    //     return(
+    //         <div>
+    //             <p>Signed In User: {user.email}</p>
+    //         </div>
+    //     )
+    if(user){
+        toast.success('Successfully Signed in..!!',{id:'login'});
+        navigate(from, { replace: true });
+    }
+
     return (
         <div>
             <section className="h-screen">
@@ -84,16 +122,19 @@ const Login = () => {
                                 {/* <!-- Email input --> */}
                                 <div className="mb-6">
                                     <input
+                                        onBlur={(e) => seEmail(e.target.value)}
                                         type="text"
                                         className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                        id="exampleFormControlInput2"
+                                        id="exampleFormControlInput1"
                                         placeholder="Email address"
+                                        required
                                     />
                                 </div>
 
                                 {/* <!-- Password input --> */}
                                 <div className="mb-6">
                                     <input
+                                        onBlur={(e) => sePassword(e.target.value)}
                                         type="password"
                                         className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         id="exampleFormControlInput2"
@@ -108,7 +149,7 @@ const Login = () => {
                                             className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                                             id="exampleCheck2"
                                         />
-                                        <label className="form-check-label inline-block text-gray-800" for="exampleCheck2"
+                                        <label className="form-check-label inline-block text-gray-800" htmlFor="exampleCheck2"
                                         >Remember me</label
                                         >
                                     </div>
@@ -117,6 +158,7 @@ const Login = () => {
 
                                 <div className="text-center lg:text-left">
                                     <button
+                                        onClick={() => signInWithEmailAndPassword(email, password)}
                                         type="button"
                                         className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                                     >
