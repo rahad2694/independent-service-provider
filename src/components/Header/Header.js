@@ -13,7 +13,7 @@ const Header = () => {
             <div className='flex ml-2 md:ml-10'>
                 <Link className='flex justify-center align-middle' to='/'>
                     <p className='text-xl font-bold mt-4'>Rahad Photography</p>
-                    <img src={logo} alt="" />
+                    <img style={{"height":"40px"}} src={logo} alt="" />
                 </Link>
             </div>
             <div className='flex justify-evenly align-middle mt-6 sm:mt-4 md:mx-20'>

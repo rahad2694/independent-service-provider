@@ -11,11 +11,13 @@ import Checkout from './components/Checkout/Checkout';
 import SignUp from './components/Login/SignUp';
 import NotFound from './components/NotFound/NotFound';
 import RequireAuth from './components/Login/RequireAuth';
+import NavBar from './components/Header/NavBar';
 
 function App() {
   return (
     <div className="App">
-      <Header></Header>
+      {/* <Header></Header> */}
+      <NavBar></NavBar>
 
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
