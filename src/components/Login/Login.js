@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -11,10 +11,10 @@ const Login = () => {
     let location = useLocation();
     let from = location.state?.from?.pathname || "/";
 
+
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const [signInWithGithub, githubUser, githubLoading, githubError] = useSignInWithGithub(auth);
     const [signInWithFacebook, facebookUser, facebookLoading, facebookError] = useSignInWithFacebook(auth);
-
     const [
         signInWithEmailAndPassword,
         emailUser,
@@ -26,6 +26,13 @@ const Login = () => {
     const [password, setPassword] = useState('');
     // console.log(email, password);
 
+    useEffect(() => {
+        if (emailUser || googleUser || githubUser || facebookUser) {
+            toast.success('Successfully Signed in..!!', { id: 'login' });
+            navigate(from, { replace: true });
+        }
+    }, [emailUser,googleUser,githubUser,facebookUser]);
+
     if (emailLoading || googleLoading || githubLoading || facebookLoading) {
         return <Spinners></Spinners>
     }
@@ -34,14 +41,7 @@ const Login = () => {
         toast.error(errorNote?.message, { id: 'error' })
         return <Login></Login>
     }
-
-    if (emailUser || googleUser || githubUser || facebookUser) {
-        navigate(from, { replace: true });
-        toast.success('Successfully Signed in..!!', { id: 'login' });
-    }
-
-    console.log(emailUser?.user);
-
+    // console.log(emailUser);
     return (
         <div>
             <section className="h-screen">

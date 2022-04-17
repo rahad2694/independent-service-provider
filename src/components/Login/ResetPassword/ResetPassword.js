@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
-import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
 import auth from '../../../Firebase/Firebase.init';
-import Spinners from '../Spinners/Spinners';
+import { sendPasswordResetEmail } from "firebase/auth";
 
 const ResetPassword = () => {
     const [email, setEmail] = useState('');
-    const [sendPasswordResetEmail, sending, error] = useSendPasswordResetEmail(auth);
-    // console.log(email);
-    if (error) {
-        return toast.error(error.message,{id:'send-error'})
+   
+    const handleResetBtn =()=>{
+        sendPasswordResetEmail(auth,email)
+        .then(()=>{
+            toast.success('Reset Email sent..!', { id: 'succeeded' });
+        })
+        .catch(error=>{
+            if (error.message.includes('user-not-found') || error.message.includes('invalid-email')) {
+                toast.error('No Such User Found!', { id: 'send-error' });
+            } else {
+                toast.error(error.message, { id: 'send-error' });
+            }
+        })
     }
-    // if (sending) {
-    //     return <p>Sending...</p>;
-    // }
     return (
         <div>
             {/* <!-- Button trigger modal --> */}
@@ -51,7 +56,6 @@ const ResetPassword = () => {
                                     required
                                 />
                             </div>
-                            {sending? <Spinners></Spinners>:<></>}
                         </div>
                         <div
                             className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
@@ -59,10 +63,7 @@ const ResetPassword = () => {
                                 className="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
                                 data-bs-dismiss="modal">Close</button>
                             <button type="button"
-                                onClick={async () => { 
-                                    await sendPasswordResetEmail(email);
-                                    toast.success('Reset Email sent..!',{id:'succeeded'});
-                                }}
+                                onClick={handleResetBtn}
                                 className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1">Send Reset Email</button>
                         </div>
                     </div>
