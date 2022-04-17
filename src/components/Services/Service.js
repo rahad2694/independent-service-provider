@@ -12,7 +12,7 @@ const Service = ({ service }) => {
                 <h1 className='font-bold my-3 text-lg'>{name}</h1>
                 <p className='text-gray-500'>{info}</p>
                 <h2 className='text-3xl font-bold my-4'>${price}</h2>
-                <Link className='bg-orange-300 px-10 font-bold py-1 rounded-xl hover:bg-orange-500' to='checkout'>Book</Link>
+                <Link className='bg-orange-300 px-10 font-bold py-1 rounded-xl hover:bg-orange-500' to='/checkout'>Book</Link>
         </div>
     );
 };
