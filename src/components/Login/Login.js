@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useAuthState, useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.init';
@@ -25,13 +25,15 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     // console.log(email, password);
-
+    const [user] = useAuthState(auth);
     useEffect(() => {
         if (emailUser || googleUser || githubUser || facebookUser) {
-            toast.success('Successfully Signed in..!!', { id: 'login' });
+            // toast.success('Successfully Signed in..!!', { id: 'login' });
+            let message = `welcome ${user?.displayName}`;
+            toast.success(message, { id: 'login' });
             navigate(from, { replace: true });
         }
-    }, [emailUser,googleUser,githubUser,facebookUser]);
+    }, [emailUser, googleUser, githubUser, facebookUser]);
 
     if (emailLoading || googleLoading || githubLoading || facebookLoading) {
         return <Spinners></Spinners>
