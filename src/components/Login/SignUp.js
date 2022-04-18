@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.init';
@@ -20,31 +20,30 @@ const SignUp = () => {
         emailLoading,
         emailError,
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
-    const [updateProfile, updating, updatingError] = useUpdateProfile(auth);
+    const [updateProfile, updating] = useUpdateProfile(auth);
 
-    const [name, setName] = useState('');
+    const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    console.log(name, email, password);
-    const [user] = useAuthState(auth);
-    console.log(user);
     useEffect(() => {
         if (emailUser || googleUser || githubUser || facebookUser) {
-            // toast.success('Successfully Signed in..!!', { id: 'login' });
-            let message = `welcome ${user?.displayName}`;
+            let message = `Successfully Signed up`;
             toast.success(message, { id: 'login' });
             navigate(from, { replace: true });
         }
     }, [emailUser, googleUser, githubUser, facebookUser]);
 
+    useEffect(() => {
+        if (emailError || googleError || githubError || facebookError ) {
+            let errorNote = emailError || googleError || githubError || facebookError;
+            toast.error(errorNote?.message, { id: 'signupError' });
+        }
+    }, [emailError, googleError, githubError,facebookError ]);
+
     if (emailLoading || googleLoading || githubLoading || facebookLoading || updating) {
         return <Spinners></Spinners>
     }
-    if (emailError || googleError || githubError || facebookError || updatingError) {
-        let errorNote = emailError || googleError || githubError || facebookError || updatingError;
-        toast.error(errorNote?.message, { id: 'signupError' });
-        return <SignUp></SignUp>
-    }
+
     return (
         <div>
             <section className="mb-10">
@@ -117,7 +116,7 @@ const SignUp = () => {
                                 {/* <!-- Name input --> */}
                                 <div className="mb-6">
                                     <input
-                                        onBlur={(e) => setName(e.target.value)}
+                                        onBlur={(e) => setDisplayName(e.target.value)}
                                         type="text"
                                         className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         id="exampleFormControlInput1"
@@ -151,8 +150,19 @@ const SignUp = () => {
                                 <div className="text-center lg:text-left">
                                     <button
                                         onClick={async () => {
-                                            createUserWithEmailAndPassword(email, password)
-                                            await updateProfile({ displayName: name });
+                                            if (displayName || email || password) {
+                                                if (!email.includes('@')) {
+                                                    toast.error('Invalid E-mail ID', { id: 'email@Error' })
+                                                }
+                                                else if (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
+                                                    await createUserWithEmailAndPassword(email, password);
+                                                    await updateProfile({ displayName });
+                                                } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
+                                                    toast.error('Password Must Contain Minimum eight characters, at least one letter and one number', { id: 'passError' })
+                                                }
+                                            } else {
+                                                toast.error('Name, Email & password required', { id: 'inputError' })
+                                            }
                                         }}
                                         type="button"
                                         className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"

@@ -23,12 +23,10 @@ const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // console.log(email, password);
+
     const [user] = useAuthState(auth);
-    console.log(user);
     useEffect(() => {
         if (emailUser || googleUser || githubUser || facebookUser) {
-            // toast.success('Successfully Signed in..!!', { id: 'login' });
             let message = `welcome ${user?.displayName}`;
             toast.success(message, { id: 'login' });
             navigate(from, { replace: true });
@@ -118,10 +116,11 @@ const Login = () => {
                                     <input
                                         onBlur={(e) => setEmail(e.target.value)}
                                         type="text"
+                                        name="email"
+
                                         className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         id="exampleFormControlInput1"
                                         placeholder="Email address"
-                                        required
                                     />
                                 </div>
 
@@ -129,6 +128,7 @@ const Login = () => {
                                 <div className="mb-6">
                                     <input
                                         onBlur={(e) => setPassword(e.target.value)}
+                                        name="password"
                                         type="password"
                                         className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         id="exampleFormControlInput2"
@@ -142,8 +142,24 @@ const Login = () => {
                                 </div>
 
                                 <div className="text-center lg:text-left">
+                                    {/* <input 
+                                    name="submit"
+                                    className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" type="submit" value="Login" /> */}
                                     <button
-                                        onClick={() => signInWithEmailAndPassword(email, password)}
+                                        onClick={() => {
+                                            if (email || password) {
+                                                if (!email.includes('@')) {
+                                                    toast.error('Invalid E-mail ID', { id: 'email@Error' })
+                                                }
+                                                else if (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
+                                                    signInWithEmailAndPassword(email, password)
+                                                } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
+                                                    toast.error('Password Must Contain Minimum eight characters, at least one letter and one number', { id: 'passError' })
+                                                }
+                                            } else {
+                                                toast.error('Email & password required', { id: 'inputError' })
+                                            }
+                                        }}
                                         type="button"
                                         className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                                     >
