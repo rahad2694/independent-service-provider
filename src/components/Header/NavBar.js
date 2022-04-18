@@ -22,7 +22,7 @@ const NavBar = () => {
                     </svg>
                 </button>
                 <div className="collapse navbar-collapse flex-grow items-center" id="navbarSupportedContent">
-                    <Link to="/" className=" flex items-center text-gray-900 hover:text-gray-900 focus:text-gray-900 mt-2 lg:mt-0 mr-1" href="#">
+                    <Link to="/" className=" flex items-center text-gray-900 hover:text-gray-900 focus:text-gray-900 mt-2 lg:mt-0 mr-1">
                         <img src={logo} style={{ "height": "40px" }} alt=""
                             loading="lazy" />
                     </Link>
@@ -32,9 +32,9 @@ const NavBar = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="flex items-center relative">
+                <div className="flex items-center relative ">
 
-                    <div className="dropdown relative">
+                    <div className="dropdown ">
                         <a className=" text-gray-500 hover:text-gray-700 focus:text-gray-700 mr-4 dropdown-toggle hidden-arrow flex items-center" id="dropdownMenuButton1"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bell"
@@ -44,7 +44,7 @@ const NavBar = () => {
                                 </path>
                             </svg>
                         </a>
-                        <ul className=" dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none left-auto right-0" aria-labelledby="dropdownMenuButton1">
+                        <ul className=" dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none right-9" aria-labelledby="dropdownMenuButton1">
                             <li className=" dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100">
                                 <NavLink to="/blogs" className={({ isActive }) => (isActive) ? 'text-red-600' : ''}>My Blogs</NavLink>
                             </li>
@@ -53,7 +53,7 @@ const NavBar = () => {
                             </li>
                         </ul>
                     </div>
-                    <div className="dropdown relative">
+                    <div className="dropdown ">
                         <a className="dropdown-toggle flex items-center hidden-arrow" href="#" id="dropdownMenuButton2" role="button"
                             data-bs-toggle="dropdown" ari a-expanded="false">
                             <img src={avatar} className="rounded-full"

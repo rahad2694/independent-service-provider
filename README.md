@@ -9,11 +9,11 @@ Live Site Link [Click Here](https://wildlife-photographer-portfoli.web.app/).
 * Implementation of protected route or private route.
 * Sending Verification email to the user while sign up.
 * Sending password reset email if forgot password.
-* Navigating user to the intended page after successful logging in.
+* Navigating user to the intended page after successful logging in & replace history.
 * Notifying success or error messages to the user visa hot-toast.
 
 
-## Frameworks used:
+### Frameworks used:
 
 * Tailwind
 * React router
