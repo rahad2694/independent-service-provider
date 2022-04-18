@@ -11,7 +11,6 @@ const Login = () => {
     let location = useLocation();
     let from = location.state?.from?.pathname || "/";
 
-
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const [signInWithGithub, githubUser, githubLoading, githubError] = useSignInWithGithub(auth);
     const [signInWithFacebook, facebookUser, facebookLoading, facebookError] = useSignInWithFacebook(auth);
@@ -26,6 +25,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     // console.log(email, password);
     const [user] = useAuthState(auth);
+    console.log(user);
     useEffect(() => {
         if (emailUser || googleUser || githubUser || facebookUser) {
             // toast.success('Successfully Signed in..!!', { id: 'login' });
@@ -43,7 +43,7 @@ const Login = () => {
         toast.error(errorNote?.message, { id: 'error' })
         return <Login></Login>
     }
-    // console.log(emailUser);
+
     return (
         <div>
             <section className="mb-20">

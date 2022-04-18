@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useCreateUserWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import React, { useEffect, useState } from 'react';
+import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../Firebase/Firebase.init';
@@ -26,22 +26,25 @@ const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     console.log(name, email, password);
+    const [user] = useAuthState(auth);
+    console.log(user);
+    useEffect(() => {
+        if (emailUser || googleUser || githubUser || facebookUser) {
+            // toast.success('Successfully Signed in..!!', { id: 'login' });
+            let message = `welcome ${user?.displayName}`;
+            toast.success(message, { id: 'login' });
+            navigate(from, { replace: true });
+        }
+    }, [emailUser, googleUser, githubUser, facebookUser]);
 
     if (emailLoading || googleLoading || githubLoading || facebookLoading || updating) {
         return <Spinners></Spinners>
     }
-
-    if (emailUser || googleUser || githubUser || facebookUser) {
-        toast.success('Successfully Signed up..!!', { id: 'signup' });
-        navigate(from, { replace: true });
-    }
     if (emailError || googleError || githubError || facebookError || updatingError) {
-        let errorNote = emailError || googleError || githubError || facebookError ||updatingError;
-        toast.error(errorNote?.message, { id: 'error' });
+        let errorNote = emailError || googleError || githubError || facebookError || updatingError;
+        toast.error(errorNote?.message, { id: 'signupError' });
         return <SignUp></SignUp>
     }
-    console.log(emailUser?.user);
-
     return (
         <div>
             <section className="mb-10">
@@ -149,7 +152,7 @@ const SignUp = () => {
                                     <button
                                         onClick={async () => {
                                             createUserWithEmailAndPassword(email, password)
-                                            await updateProfile({ displayName:name });
+                                            await updateProfile({ displayName: name });
                                         }}
                                         type="button"
                                         className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
