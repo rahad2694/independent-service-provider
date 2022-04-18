@@ -12,6 +12,7 @@ import SignUp from './components/Login/SignUp';
 import NotFound from './components/NotFound/NotFound';
 import RequireAuth from './components/Login/RequireAuth';
 import NavBar from './components/Header/NavBar';
+import BookingSuccess from './components/Checkout/BookingSuccess';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path='/about' element={<About></About>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
+        <Route path='/success' element={<BookingSuccess></BookingSuccess>}></Route>
         <Route path='/checkout' element={
           <RequireAuth>
             <Checkout></Checkout>
