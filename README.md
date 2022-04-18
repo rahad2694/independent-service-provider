@@ -1,4 +1,5 @@
-# Wildlife-photographer-portfolio
+# Rahad Clicks
+### (A Wildlife-photographer-portfolio)
 
 Live Site Link [Click Here](https://wildlife-photographer-portfoli.web.app/).
 
@@ -10,7 +11,7 @@ Live Site Link [Click Here](https://wildlife-photographer-portfoli.web.app/).
 * Sending Verification email to the user while sign up.
 * Sending password reset email if forgot password.
 * Navigating user to the intended page after successful logging in & replace history.
-* Notifying success or error messages to the user visa hot-toast.
+* Notifying success or error messages to the user via hot-toast.
 
 
 ### Frameworks used:

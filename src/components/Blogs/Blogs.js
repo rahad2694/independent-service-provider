@@ -61,15 +61,15 @@ const Blogs = () => {
                             Except <strong>authentication</strong>, Firebase provides so many robust cloud computing services. Some of these are :
                             <div className='border-2 w-3/4 mx-auto py-3 mt-3 shadow-lg'>
                                 <ul>
-                                    <li className='font-bold'>Cloud Firestore.</li>
-                                    <li className='font-bold'>Cloud Functions.</li>
-                                    <li className='font-bold'>Cloud Storage.</li>
-                                    <li className='font-bold'>Cloud Messaging.</li>
-                                    <li className='font-bold'>Hosting.</li>
-                                    <li className='font-bold'>Google Analytics.</li>
-                                    <li className='font-bold'>Predictions.</li>
-                                    <li className='font-bold'>Dynamic Links.</li>
-                                    <li className='font-bold'>Remote Config.</li>
+                                    <li className='font-semibold'>Cloud Firestore.</li>
+                                    <li className='font-semibold'>Cloud Functions.</li>
+                                    <li className='font-semibold'>Cloud Storage.</li>
+                                    <li className='font-semibold'>Cloud Messaging.</li>
+                                    <li className='font-semibold'>Hosting.</li>
+                                    <li className='font-semibold'>Google Analytics.</li>
+                                    <li className='font-semibold'>Predictions.</li>
+                                    <li className='font-semibold'>Dynamic Links.</li>
+                                    <li className='font-semibold'>Remote Config.</li>
                                 </ul>
 
                             </div>
