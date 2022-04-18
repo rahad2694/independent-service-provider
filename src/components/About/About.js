@@ -5,7 +5,7 @@ import rahad from '../../images/rahad.png'
 
 const About = () => {
     return (
-        <div className='shadow-xl border w-3/4 md:w-2/4 mx-auto px-10 pb-8 mt-4 mb-8'>
+        <div className='shadow-xl border w-3/4 md:w-2/4 mx-auto px-10 pb-8 mt-4 mb-20'>
             <div className='flex justify-center'>
                 <img className='w-2/4' src={rahad} alt="" />
             </div>

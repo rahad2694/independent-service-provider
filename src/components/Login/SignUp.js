@@ -44,7 +44,7 @@ const SignUp = () => {
 
     return (
         <div>
-            <section className="h-screen">
+            <section className="mb-10">
                 <div className="px-6 h-full text-gray-800">
                     <div
                         className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6"
@@ -52,7 +52,7 @@ const SignUp = () => {
                         <div
                             className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0"
                         >
-                            <img src="https://www.seoclerk.com/pics/want69178-1wFX871559291644.jpg" className="w-full" alt="login-logo" />
+                            <img src="https://img.freepik.com/free-vector/sign-up-concept-illustration_114360-7865.jpg?t=st=1650271995~exp=1650272595~hmac=c3f6965ddf672f82382af0d6f1b688b3cb684039f0593cb9fb7569a3b5285ee2&w=740" className="w-full" alt="login-logo" />
                         </div>
                         <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
                             <form>
