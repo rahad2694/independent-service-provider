@@ -17,7 +17,6 @@ import BookingSuccess from './components/Checkout/BookingSuccess';
 function App() {
   return (
     <div className="App">
-      {/* <Header></Header> */}
       <NavBar></NavBar>
 
       <Routes>
